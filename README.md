@@ -22,4 +22,4 @@ https://github.com/surmon-china/vue-awesome-swiper
 
 因此，项目的完善是有可能的，但不会过多再将重心放在这里，时间实在不允许。
 
-感谢萌兔（http://wusagi.pw/）激发了该项目的开发，也作了一些参考（比如运用了jszip）。
+感谢萌兔（ http://wusagi.pw/ ）激发了该项目的开发，也作了一些参考（比如运用了jszip）。
