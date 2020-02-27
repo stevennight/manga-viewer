@@ -4,7 +4,7 @@
 包含从左到右，从右到左，条漫三种模式。
 
 ## demo:
-https://comic.nyatori.com/#/
+https://comic.nyatori.com/
 
 ## libs
 Vue 以及其各大常用插件
