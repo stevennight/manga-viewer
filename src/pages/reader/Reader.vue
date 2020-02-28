@@ -1,5 +1,6 @@
 <template>
     <div>
+        <header-component v-show="showController"></header-component>
         <div :blobList="blobList" :is="readerMode" @imageclick="imageClick" v-if="blobList.length"></div>
         <controller-component v-show="showController"></controller-component>
     </div>
@@ -13,6 +14,7 @@
     import RowReaderComponent from "./components/RowReader";
     import RowReaderReverseComponent from "./components/RowReaderReverse";
     import ControllerComponent from "./components/Controller";
+    import HeaderComponent from "./components/Header";
 
     export default {
         name: "Reader",
@@ -26,7 +28,8 @@
             ColumnReaderComponent,
             RowReaderComponent,
             RowReaderReverseComponent,
-            ControllerComponent
+            ControllerComponent,
+            HeaderComponent
         },
         computed: {
             ...mapState(['currentFile', 'readerMode'])
@@ -71,7 +74,7 @@
                                 zipEntry.async('blob').then(function (content) {
                                     blobList.push({
                                         name: zipEntry.name,
-                                        blob: window.URL.createObjectURL(content),
+                                        blob: window.URL.createObjectURL(content)
                                     });
                                     fileFinishNum++;
                                     if(fileFinishNum === fileNum){
@@ -109,7 +112,7 @@
                 });
                 console.log(blobList);
                 this.blobList = blobList;
-            }
+            },
         },
         mounted(){
             this.readComicFile();

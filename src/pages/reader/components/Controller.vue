@@ -45,7 +45,7 @@
         height: $height
         overflow hidden;
         display flex
-        z-index 1
+        z-index 2
         .controller-btn
             flex 1
             text-align center
