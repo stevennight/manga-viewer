@@ -1,8 +1,8 @@
 <template>
     <div class="swiper-container" @click="imageClick">
-        <swiper class="swiper-wrapper" :options="swiperOptions" ref="mySwiper" @slideChange="swiperSlideChange">
+        <swiper class="swiper-wrapper" :options="swiperOptions" ref="mySwiper" @slideChange="swiperSlideChange" dir="rtl">
             <!-- slides -->
-            <swiper-slide class="swiper-slide" v-for="item of list" :key="item.name">
+            <swiper-slide class="swiper-slide" v-for="item of blobList" :key="item.name">
                 <div class="swiper-zoom-container">
                     <img :src="item.blob" />
                 </div>
@@ -29,13 +29,14 @@
         data(){
             return {
                 swiperOptions: {
-                    initialSlide: (this.$store.state.currentTotal - this.$store.state.currentPage),
+                    initialSlide: (this.$store.state.currentPage - 1),
+                    // initialSlide: (this.$store.state.currentTotal - this.$store.state.currentPage),
                     pagination: {
                         el: '.swiper-pagination',
                         type: 'custom',
                     //     clickable: true
-                        renderCustom(swiper, current, total) {
-                            current = total - current + 1;
+                        renderCustom(swiper, total, current) {
+                            // current = total - current + 1;
                             return '<span>'+current+' / '+total+'</span>';
                         }
                     },
@@ -50,11 +51,6 @@
             ...mapGetters(['currentGetters']),
             swiper() {
                 return this.$refs.mySwiper.swiper
-            },
-            list(){
-                let list = this.blobList.slice();
-                list.reverse();
-                return list;
             }
         },
         methods: {
@@ -63,18 +59,27 @@
                 this.$emit('imageclick');
             },
             swiperSlideChange(){
-                this.changeCurrent({currentPage: (this.currentTotal - this.swiper.realIndex)});
+                // this.changeCurrent({currentPage: (this.currentTotal - this.swiper.realIndex)});
+                this.changeCurrent({currentPage: this.swiper.realIndex+1});
             },
         },
         watch: {
             currentPage(){
                 let swiper = this.swiper;
                 let swiperIndex = swiper.realIndex;
-                let currentPage = this.currentTotal - this.currentPage;
+                let currentPage = this.currentPage - 1;
                 if(swiperIndex !== currentPage){
                     swiper.slideTo(currentPage, 100, false);
                 }
             }
+            // currentPage(){
+            //     let swiper = this.swiper;
+            //     let swiperIndex = swiper.realIndex;
+            //     let currentPage = this.currentTotal - this.currentPage;
+            //     if(swiperIndex !== currentPage){
+            //         swiper.slideTo(currentPage, 100, false);
+            //     }
+            // }
         }
     }
 </script>

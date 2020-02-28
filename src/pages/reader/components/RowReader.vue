@@ -24,7 +24,8 @@
                 default(){
                     return [];
                 }
-            }
+            },
+            type: String
         },
         data(){
             return {
@@ -78,7 +79,8 @@
         span
             color: white
             background rgba(0,0,0,0.4)
-            padding: .12rem .24rem
+            font-size smaller
+            padding: .06rem .12rem
             position fixed
             right 0
             bottom 0

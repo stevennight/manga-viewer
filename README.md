@@ -18,6 +18,9 @@ https://github.com/surmon-china/vue-awesome-swiper
 vue-slider-component插件
 https://nightcatsama.github.io/vue-slider-component/#/
 
+better-scroll插件
+https://ustbhuangyi.github.io/better-scroll/
+
 ## 说明
 目前项目目前很不完善，基本只是实现了基础的文件读取和展示，各种体验也很一般。
 
