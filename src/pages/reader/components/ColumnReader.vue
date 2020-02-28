@@ -77,7 +77,6 @@
                 }
             });
             this.scroll.on('touchEnd', this.imagesScroll);
-            this.scroll.on('scroll', this.imagesScroll);
         },
         destroyed() {
             delete this.scroll;
