@@ -32,10 +32,10 @@
             HeaderComponent
         },
         computed: {
-            ...mapState(['currentFile', 'readerMode'])
+            ...mapState(['currentFile', 'readerMode', 'currentTitle', 'currentTotal', 'currentPage'])
         },
         methods: {
-            ...mapMutations(['changeCurrentFile']),
+            ...mapMutations(['changeCurrentFile', 'changeCurrent']),
             imageClick(){
                 this.showController = !this.showController;
             },
@@ -53,6 +53,21 @@
                     return;
                 }
                 let file = files[0];
+
+                let fileName = file.name;
+                let reg = new RegExp(/(.*)\.(.*?)$/g);
+                let matches = [...fileName.matchAll(reg)];
+                if(matches){
+                    console.log(matches);
+                    fileName = matches[0][1];
+                }
+                console.log(this.currentTitle);
+                if(this.currentTitle !== fileName){
+                    //与历史记录不同的漫画，重置頁碼。
+                    this.changeCurrent({currentTitle: fileName, currentPage: 1});
+                }else{
+                    this.changeCurrent({currentTitle: fileName});
+                }
 
                 switch (file.type) {
                     case 'application/x-zip-compressed':
@@ -110,7 +125,11 @@
                         return 1;
                     }
                 });
-                console.log(blobList);
+
+                this.changeCurrent({
+                    currentTotal: blobList.length
+                });
+
                 this.blobList = blobList;
             },
         },

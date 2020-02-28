@@ -1,6 +1,6 @@
 <template>
     <div class="swiper-container" @click="imageClick">
-        <swiper class="swiper-wrapper" :options="swiperOptions" ref="mySwiper">
+        <swiper class="swiper-wrapper" :options="swiperOptions" ref="mySwiper" @slideChange="swiperSlideChange">
             <!-- slides -->
             <swiper-slide class="swiper-slide" v-for="item of list" :key="item.name">
                 <div class="swiper-zoom-container">
@@ -14,6 +14,8 @@
 </template>
 
 <script>
+    import {mapState, mapMutations, mapGetters} from 'vuex'
+
     export default {
         name: "RowReaderReserve",
         props: {
@@ -27,7 +29,7 @@
         data(){
             return {
                 swiperOptions: {
-                    initialSlide: this.blobList.length,
+                    initialSlide: (this.$store.state.currentTotal - this.$store.state.currentPage),
                     pagination: {
                         el: '.swiper-pagination',
                         type: 'custom',
@@ -44,6 +46,8 @@
             }
         },
         computed: {
+            ...mapState(['currentTitle', 'currentTotal', 'currentPage',]),
+            ...mapGetters(['currentGetters']),
             swiper() {
                 return this.$refs.mySwiper.swiper
             },
@@ -54,8 +58,22 @@
             }
         },
         methods: {
+            ...mapMutations(['changeCurrent']),
             imageClick(){
                 this.$emit('imageclick');
+            },
+            swiperSlideChange(){
+                this.changeCurrent({currentPage: (this.currentTotal - this.swiper.realIndex)});
+            },
+        },
+        watch: {
+            currentPage(){
+                let swiper = this.swiper;
+                let swiperIndex = swiper.realIndex;
+                let currentPage = this.currentTotal - this.currentPage;
+                if(swiperIndex !== currentPage){
+                    swiper.slideTo(currentPage, 100, false);
+                }
             }
         }
     }
@@ -66,7 +84,8 @@
         span
             color: white
             background rgba(0,0,0,0.4)
-            padding: .12rem .24rem
+            font-size smaller
+            padding: .06rem .12rem
             position fixed
             right 0
             bottom 0

@@ -12,6 +12,7 @@
         computed: {
             ...mapState(['currentFile']),
             fileName(){
+                if(!this.currentFile[0]) return;
                 let fileName = this.currentFile[0].name;
                 let reg = new RegExp(/(.*)\.(.*?)$/g);
                 let matches = [...fileName.matchAll(reg)];
