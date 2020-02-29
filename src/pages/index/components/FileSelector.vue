@@ -121,6 +121,10 @@
                 background: #D0EEFF;
                 padding .12rem
                 border .01rem solid #99D3F5
+                overflow hidden
+                white-space nowrap
+                text-overflow ellipsis
+                max-width 100%
         .history-slot-selector-btn
             button
                 font-weight bolder;
