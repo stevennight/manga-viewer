@@ -1,6 +1,6 @@
 <template>
     <div class="swiper-container" @click="imageClick">
-        <swiper class="swiper-wrapper" :options="swiperOptions" ref="mySwiper" @slideChange="swiperSlideChange">
+        <swiper class="swiper-wrapper" :options="swiperOptions" ref="mySwiper" @slideChange="swiperSlideChange" @touchmove.native.prevent>
             <!-- slides -->
             <swiper-slide class="swiper-slide" v-for="item of blobList" :key="item.name">
                 <div class="swiper-zoom-container">

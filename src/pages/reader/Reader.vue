@@ -1,14 +1,19 @@
 <template>
     <div>
-        <header-component v-show="showController"></header-component>
-        <div :blobList="blobList" :is="readerMode" @imageclick="imageClick" v-if="blobList.length"></div>
-        <controller-component v-show="showController"></controller-component>
+        <fullscreen ref="fullscreen" @change="fullscreenChange">
+            <header-component v-show="showController"></header-component>
+            <div :blobList="blobList" :is="readerMode" @imageclick="imageClick" v-if="blobList.length"></div>
+            <controller-component v-show="showController" @toggleFullScreen="toggleFullScreen"></controller-component>
+        </fullscreen>
     </div>
 </template>
 
 <script>
     import { mapState, mapMutations } from 'vuex'
     import JSZip from 'jszip'
+    import fullscreen from 'vue-fullscreen'
+    import Vue from 'vue'
+    Vue.use(fullscreen);
     //modules
     import ColumnReaderComponent from "./components/ColumnReader";
     import RowReaderComponent from "./components/RowReader";
@@ -20,8 +25,9 @@
         name: "Reader",
         data(){
             return {
+                fullscreen: false,
                 showController: true,
-                blobList: []
+                blobList: [],
             };
         },
         components: {
@@ -132,6 +138,13 @@
 
                 this.blobList = blobList;
             },
+            toggleFullScreen () {
+                this.$refs['fullscreen'].toggle() // recommended
+                // this.fullscreen = !this.fullscreen // deprecated
+            },
+            fullscreenChange (fullscreen) {
+                this.fullscreen = fullscreen
+            }
         },
         mounted(){
             this.readComicFile();

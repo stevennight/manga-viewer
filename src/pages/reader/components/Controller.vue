@@ -23,6 +23,9 @@
             <div class="controller-btn" :class="{'controller-btn-active': readerMode==='column-reader-component'}" @click="changeReaderMode('column-reader-component')">
                 条漫模式
             </div>
+            <div class="controller-btn" @click="toggleFullScreen">
+                全屏
+            </div>
             <div class="controller-btn" @click="back">
                 返回
             </div>
@@ -68,6 +71,9 @@
             ...mapMutations(['changeReaderMode', 'changeCurrent']),
             back(){
                 this.$router.push('/');
+            },
+            toggleFullScreen(){
+                this.$emit('toggleFullScreen');
             }
         }
     }
