@@ -1,5 +1,5 @@
 <template>
-    <div class="header-container">
+    <div @touchstart.prevent class="header-container">
         {{fileName}}
     </div>
 </template>
