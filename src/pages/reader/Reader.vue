@@ -47,7 +47,6 @@
             },
             readComicFile(){
                 let files = this.currentFile;
-                console.log(files);
 
                 if(!(files instanceof File) && !(files instanceof FileList)){
                     this.$router.push('/');
@@ -61,13 +60,15 @@
                 let file = files[0];
 
                 let fileName = file.name;
-                let reg = new RegExp(/(.*)\.(.*?)$/g);
-                let matches = [...fileName.matchAll(reg)];
+                let reg = new RegExp(/(.*)\.(.*?)$/);
+                let matches = fileName.match(reg);
+                console.log(matches);
                 if(matches){
-                    console.log(matches);
-                    fileName = matches[0][1];
+                    fileName = matches[1];
                 }
                 console.log(this.currentTitle);
+
+
                 if(this.currentTitle !== fileName){
                     //与历史记录不同的漫画，重置頁碼。
                     this.changeCurrent({currentTitle: fileName, currentPage: 1});

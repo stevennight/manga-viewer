@@ -1,6 +1,6 @@
 <template>
     <div @touchmove.prevent class="header-container">
-        {{fileName}}
+        {{currentTitle}}
     </div>
 </template>
 
@@ -10,18 +10,7 @@
     export default {
         name: "Header",
         computed: {
-            ...mapState(['currentFile']),
-            fileName(){
-                if(!this.currentFile[0]) return;
-                let fileName = this.currentFile[0].name;
-                let reg = new RegExp(/(.*)\.(.*?)$/g);
-                let matches = [...fileName.matchAll(reg)];
-                if(matches){
-                    console.log(matches);
-                    fileName = matches[0][1];
-                }
-                return fileName;
-            }
+            ...mapState(['currentTitle']),
         }
     }
 </script>
