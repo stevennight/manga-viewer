@@ -1,5 +1,5 @@
 <template>
-    <div @touchmove.prevent class="header-container">
+    <div class="header-container">
         {{currentTitle}}
     </div>
 </template>
