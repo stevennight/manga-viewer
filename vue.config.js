@@ -1,4 +1,5 @@
 module.exports = {
+    outputDir: 'docs',
     chainWebpack: config => {
         config
             .plugin('html')
