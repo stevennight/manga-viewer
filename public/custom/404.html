@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>404 Not Found</title>
+	<style type="text/css">
+		body {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+		}
+		.title, .content, .footer {
+			display: flex;
+			justify-content: center
+		}
+		a {
+			text-decoration: none;
+			color: green;
+		}
+	</style>
+</head>
+<body>
+	<div class="title"><h1>Error: 404</h1></div>
+	<div class="content"><h2>页面走失咯，<a href="/">戳这里重新导航</a></h2></div>
+	<div class="footer">host:&nbsp;<span id="hostname">hostname</span></div>
+
+	<script type="text/javascript">
+		document.getElementById('hostname').innerText = location.hostname + (
+				location.port === '80'? '' : ':' + location.port
+		);
+	</script>
+</body>
+</html>
