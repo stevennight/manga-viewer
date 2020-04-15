@@ -29,8 +29,9 @@
 	<div class="footer">host:&nbsp;<span id="hostname">hostname</span></div>
 
 	<script type="text/javascript">
+		console.log(location.port);
 		document.getElementById('hostname').innerText = location.hostname + (
-				location.port === '80'? '' : ':' + location.port
+				location.port === '80' || location.port === '443'? '' : (':' + location.port)
 		);
 	</script>
 </body>
